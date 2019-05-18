@@ -1,7 +1,6 @@
 package com.assignment.game;
 
-import com.assignment.game.gameobjects.Plus;
-import com.assignment.game.gameobjects.Piece;
+import com.assignment.game.gameobjects.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -38,6 +37,16 @@ public class Game extends ApplicationAdapter implements Screen, InputProcessor {
         pieces.add(new Plus(2, "bluePlus.png", new Vector2(6, 5)));
         pieces.add(new Plus(1, "redPlus.png", new Vector2(0, 0)));
         pieces.add(new Plus(1, "redPlus.png", new Vector2(6, 0)));
+        pieces.add(new Triangle(2, "blueTriangle.png", new Vector2(1, 5)));
+        pieces.add(new Triangle(2, "blueTriangle.png", new Vector2(5, 5)));
+        pieces.add(new Triangle(1, "redTriangle.png", new Vector2(1, 0)));
+        pieces.add(new Triangle(1, "redTriangle.png", new Vector2(5, 0)));
+        pieces.add(new Chevron(2, "blueChevron.png", new Vector2(2, 5)));
+        pieces.add(new Chevron(2, "blueChevron.png", new Vector2(4, 5)));
+        pieces.add(new Chevron(1, "redChevron.png", new Vector2(2, 0)));
+        pieces.add(new Chevron(1, "redChevron.png", new Vector2(4, 0)));
+        pieces.add(new Sun(2, "blueSun.png", new Vector2(3, 5)));
+        pieces.add(new Sun(1, "redSun.png", new Vector2(3, 0)));
         for (Piece p : pieces) {
             System.out.println(p.getPosition());
         }
@@ -62,6 +71,8 @@ public class Game extends ApplicationAdapter implements Screen, InputProcessor {
         for (Piece p : pieces) {
             p.drawRectangles();
         }
+
+        updatePiece();
 
     }
 
@@ -117,24 +128,24 @@ public class Game extends ApplicationAdapter implements Screen, InputProcessor {
                     if (!p.getSelect()) {
                         if (p.getPosition().x == pointerX && p.getPosition().y == pointerY) {
                             for (Piece op : pieces) {
-                                op.deselect();
+                                if (op.getTeam() == turn) {
+                                    op.deselect();
+                                }
                             }
                             p.selected();
-                            if(p.getSelect()){
-                                p.move((int) pointerX, (int) pointerY);
-                            }
-
                             System.out.println("select");
                         }
-                    } else {
-                        if (p.getPosition().x == pointerX && p.getPosition().y == pointerY) {
-                            p.deselect();
-                            System.out.println("deselect");
-                        }
                     }
+
                 }
 
 
+            }
+            for (Piece p : pieces) {
+                if (p.getSelect()) {
+                    p.move((int) pointerX, (int) pointerY);
+                    turn = p.endTurn();
+                }
             }
             return true;
         }
@@ -176,6 +187,22 @@ public class Game extends ApplicationAdapter implements Screen, InputProcessor {
 
     }
 
+    public void updatePiece(){
+        for(int i = 0; i < pieces.size(); i++){
+            if(pieces.get(i).getTeam() == turn){
+                for(int j = 0; j < pieces.size(); j++){
+                    if(pieces.get(j).getTeam() != turn){
+                        if(pieces.get(i).getPosition().x == pieces.get(j).getPosition().x && pieces.get(i).getPosition().y == pieces.get(j).getPosition().y){
+                            System.out.println("delete"+ pieces.get(i).getPosition());
+                            pieces.remove(i);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
 
 }
 
@@ -190,4 +217,6 @@ class InputTransform {
     public static float getCursorToModelY(int screenY, int cursorY) {
         return ((float) (screenY - cursorY)) * appHeight / ((float) screenY);
     }
+
 }
+

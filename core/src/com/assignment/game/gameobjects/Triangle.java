@@ -1,8 +1,5 @@
 package com.assignment.game.gameobjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,15 +7,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Plus extends Piece {
+public class Triangle extends Piece {
 
-    public Plus(int team, String name, Vector2 position) {
+    public Triangle(int team, String name, Vector2 position) {
         super(team, name, position);
-
     }
 
 
@@ -45,14 +39,15 @@ public class Plus extends Piece {
 
             //check left
 
-            rectangles.add(new Rectangle(new Rectangle((int) position.x, (int) position.y + 1, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x, (int) position.y + 2, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x, (int) position.y - 1, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x, (int) position.y - 2, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x + 1, (int) position.y, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x + 2, (int) position.y, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x - 1, (int) position.y, SIZE, SIZE)));
-            rectangles.add(new Rectangle(new Rectangle((int) position.x - 2, (int) position.y, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x + 1, (int) position.y + 1, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x + 2, (int) position.y + 2, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x - 1, (int) position.y - 1, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x - 2, (int) position.y - 2, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x - 1, (int) position.y + 1, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x - 2, (int) position.y + 2, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x + 1, (int) position.y - 1, SIZE, SIZE)));
+            rectangles.add(new Rectangle(new Rectangle((int) position.x + 2, (int) position.y - 2, SIZE, SIZE)));
+
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.RED);
             for (Rectangle r : rectangles) {
@@ -86,7 +81,6 @@ public class Plus extends Piece {
 
     public void deselect() {
         select = false;
-
         System.out.println("deselect");
     }
 
@@ -113,4 +107,3 @@ public class Plus extends Piece {
 
     }
 }
-

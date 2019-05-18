@@ -25,6 +25,7 @@ public abstract class Piece {
     public ArrayList<Rectangle> rectangles;
 
 
+
     public Piece(int team, String name, Vector2 position) {
         texture = new Texture(name);
         sprite = new Sprite(texture);
@@ -41,6 +42,8 @@ public abstract class Piece {
 
     public abstract void render(Batch batch);
 
+    public abstract void createRectangles(ArrayList<Rectangle> others);
+
     public abstract void drawRectangles();
 
     public abstract Sprite getSprite();
@@ -56,6 +59,8 @@ public abstract class Piece {
     public abstract void deselect();
 
     public abstract void move(int mouseX, int mouseY);
+
+    public abstract int endTurn();
 
 
 }
