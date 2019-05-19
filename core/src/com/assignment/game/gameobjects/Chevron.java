@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Chevron extends Piece {
     public Chevron(int team, String name, Vector2 position) {
         super(team, name, position);
+        id = 2;
 
     }
 
@@ -101,5 +102,10 @@ public class Chevron extends Piece {
             return 1;
         }
 
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }

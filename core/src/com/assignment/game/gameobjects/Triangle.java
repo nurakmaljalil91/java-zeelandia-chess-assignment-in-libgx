@@ -13,6 +13,7 @@ public class Triangle extends Piece {
 
     public Triangle(int team, String name, Vector2 position) {
         super(team, name, position);
+        id = 3;
     }
 
 
@@ -105,5 +106,10 @@ public class Triangle extends Piece {
             return 1;
         }
 
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }

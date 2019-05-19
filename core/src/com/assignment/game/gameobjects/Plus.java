@@ -18,6 +18,7 @@ public class Plus extends Piece {
 
     public Plus(int team, String name, Vector2 position) {
         super(team, name, position);
+        id = 4;
 
     }
 
@@ -111,6 +112,11 @@ public class Plus extends Piece {
             return 1;
         }
 
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }
 

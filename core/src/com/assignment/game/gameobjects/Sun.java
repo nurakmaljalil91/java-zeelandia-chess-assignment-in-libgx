@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Sun extends Piece {
     public Sun(int team, String name, Vector2 position) {
         super(team, name, position);
+        id = 1;
     }
 
 
@@ -104,5 +105,10 @@ public class Sun extends Piece {
             return 1;
         }
 
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }
